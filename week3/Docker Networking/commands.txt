@@ -1,0 +1,31 @@
+docker image pull masteringdockerfouthedition/dockerfile-example:latest
+docker image ls
+docker container run -d -p8080:80 --name example masteringdockerthirdedition/dockerfiles-example
+docker image pull masteringdockerfouthedition/multi-stage
+docker image ls
+docker container run -d -p 8000:80 --name go-hello-world masteringdockerfouthedition/multi-stage
+curl http://localhost:8000/
+docker container stop example go-hello-world
+docker container rm example go-hello-world
+docker login
+docker build --tag masteringdockerfouthedition/scratch-example:latest .
+docker image push masteringdockerfouthedition/scratch-example:latest
+docker image pull registry:2
+docker container run -d -p 5000:5000 --name registry registry:2
+docker image pull alpine
+docker image tag alpine localhost:5000/localalpine
+docker image push localhost:5000/localalpine
+docker image ls
+docker image rm alpine localhost:5000/localalpine
+docker image pull localhost:5000/localalpine
+docker image ls
+docker container stop registry
+docker container rm -v registry
+cat ~/.githubpackage | docker login docker.pkg.github.com -u russmckendrick --password-stdin
+docker image build --tag docker.pkg.github.com/russmckendrick/mastering-docker-fourth-edition/dockerfile-example:latest .4
+docker image push docker.pkg.github.com/russmckendrick/mastering-docker-fourth-edition/dockerfile-example:latest
+docker image pull docker.pkg.github.com/russmckendrick/mastering-docker-fourth-edition/dockerfile-example:latest
+cat ~/.azureacrpassword | docker login masteringdocker.azurecr.io -u masteringdocker --password-stdin
+docker image build --tag masteringdocker.azurecr.io/dockerfile-example:latest .
+docker image push masteringdocker.azurecr.io/dockerfile-example:latest
+
