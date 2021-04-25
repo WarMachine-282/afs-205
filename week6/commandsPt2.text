@@ -1,0 +1,5 @@
+PowerShell:
+
+List volumes: $ docker volume ls
+Remove one or more volumes:  $ docker volume rm [VOLUME-NAME]
+Remove all unused local volumes:  $ docker volume prune
